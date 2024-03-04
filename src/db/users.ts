@@ -22,9 +22,8 @@ export const getUserBySessionToken = (sessionToken: String) => UserModel.findOne
 
 export const getUserById = (id: String) => UserModel.findById(id);
 
-export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => {
-    user.toObject();
-})
+export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => user.toObject({ transform: (doc, ret) => ({ username: ret.username, email: ret.email }) }));
+
 
 export const deleteUserById = (id: String) => UserModel.findOneAndDelete({ _id: id });
 
