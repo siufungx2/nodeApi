@@ -21,8 +21,10 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(8081, () => {
-    console.log("Server running on port 8080")
+const appUrl = process.env.APP_URL;
+const serverPort = process.env.SERVER_PORT;
+server.listen(serverPort, () => {
+    console.log(`Server running on ${appUrl}:${serverPort}`)
 })
 
 const mongoConnectionString = process.env.MONGO_CONNECTION_STRING;
